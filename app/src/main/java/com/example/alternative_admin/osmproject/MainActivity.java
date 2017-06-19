@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,14 +49,17 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             if(v.getId() == R.id.next){
                 // TODO Auto-generated method stub
+                Toast.makeText(MainActivity.this, "To next page", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,Map.class);
                 startActivity(intent);
+
             }else if(v.getId() == R.id.GetInfo){
                 //Info.setText("New Info From WebPage");
                 new Thread(runnable).start();
             }
-
+            //finish();
         }
 
     }

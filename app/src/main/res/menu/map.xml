@@ -6,7 +6,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="Map is here"
-    />
+        android:title="Hello, darkness my old friend"/>
 
 </menu>
+

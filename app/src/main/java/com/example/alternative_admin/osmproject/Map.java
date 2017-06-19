@@ -14,8 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 import android.widget.Button;
@@ -134,26 +132,6 @@ public class Map extends Activity {
             }
         }
     };
-	/*
-	public void Addtext(){
-		//Create Overlay for marker
-				OverlayItem myOverlayItem =
-						new OverlayItem("Here","Current Position", myLocation);
-				String marker =
-						"lan";
-				myOverlayItem.setMarker(marker);
-
-				ArrayList<OverlayItem> overlayArray =
-						new ArrayList<OverlayItem>();
-				overlayArray.add(myOverlayItem);
-
-				defaultResourceProxyImpl = new DefaultResourceProxyImpl(this);
-				this.iconOverlay = new ItemizedIconOverlay<OverlayItem>(overlayArray, marker,null, defaultResourceProxyImpl);
-				mapview.getOverlays().add(iconOverlay);
-
-	}
-	 */
-
 
     public void AddMarker(){
         //Create Overlay for marker
@@ -200,12 +178,14 @@ public class Map extends Activity {
 
     Location getMyLocation(){
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ){
-            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
-                    MY_PERMISSION_ACCESS_COARSE_LOCATION);
+        if (locationManager != null) {
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                return locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
         }
-        return locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
+        Toast.makeText(mapview.getContext(),"Do not have Permission", Toast.LENGTH_LONG);
+        return null;
     }
 }
 

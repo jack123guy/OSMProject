@@ -24,6 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Map"
+            android:label="Second Page">
+        </activity>>
+        <activity android:name=".newLayoutForTest"
+            android:label="ThirdPage"></activity>>
     </application>
 
 </manifest>
